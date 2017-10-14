@@ -20,14 +20,14 @@ import (
 type Serr struct{ msg, stacktrace string }
 
 // Error satisfies the `error` type interface.
-func (s *Serr) Error() string { return s.msg }
+func (s Serr) Error() string { return s.msg }
 
 // Stack returns the stacktrace captured when the Serr was formed.
-func (s *Serr) Stack() string { return s.stacktrace }
+func (s Serr) Stack() string { return s.stacktrace }
 
 // New returns a Serr with a stacktrace captured for the current goroutine.
 func New(x string, args ...interface{}) error {
 	msg := fmt.Sprintf(x, args...)
 	stacktrace := fmt.Sprintf("%s", debug.Stack())
-	return &Serr{msg, stacktrace}
+	return Serr{msg, stacktrace}
 }
