@@ -4,10 +4,14 @@
 // `serr.New` is a drop-in replacement for `fmt.Errorf` and `errors.New`.
 //
 // Usage:
-//   err := serr.New("yeah, it failed here because %v", badStuff)
-//	 // <meanwhile, back in main()...>
-//	 if err := reallyDeepFunctionCall(); err != nil {
-//       fmt.Println("got err:", err.Error(), "because\n" + err.Stack())
+//   err := serr.New("yeah, it failed here because %v", 123)
+//   // <meanwhile, back in main()...>
+//   if err := doStuff(); err != nil {
+//       if se, ok := err.(serr.Serr); ok {
+//           fmt.Println(err, "because", se.Stack())
+//       } else {
+//	         fmt.Println(err)
+//       }
 //   }
 package serr
 

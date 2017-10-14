@@ -7,7 +7,7 @@
 	// <meanwhile, back in main()...>
 	if err := doStuff(); err != nil {
 		if se, ok := err.(serr.Serr); ok {
-			fmt.Println(err.Error(), "because", err.Stack())
+			fmt.Println(err, "because", se.Stack())
 		} else {
 			fmt.Println(err)
 		}
